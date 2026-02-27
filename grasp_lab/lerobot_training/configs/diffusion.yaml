@@ -1,0 +1,50 @@
+# Diffusion Policy hyperparameters
+# Reference: https://diffusion-policy.cs.columbia.edu/
+
+policy:
+  name: diffusion
+
+  # Model architecture
+  n_obs_steps: 2
+  n_action_steps: 8
+  horizon: 16                   # total prediction horizon
+  input_shapes:
+    observation.state: [7]
+    observation.images.wrist: [3, 96, 96]
+  output_shapes:
+    action: [7]
+
+  # Vision encoder
+  vision_backbone: resnet18
+  crop_shape: [84, 84]
+  crop_is_random: true
+
+  # U-Net
+  down_dims: [512, 1024, 2048]
+  kernel_size: 5
+  n_groups: 8
+
+  # Diffusion
+  num_train_timesteps: 100
+  num_inference_steps: 100
+  beta_schedule: squaredcos_cap_v2
+  prediction_type: epsilon       # epsilon | sample
+
+  # Normalization
+  normalize_inputs: true
+  normalize_targets: true
+
+training:
+  seed: 42
+  num_epochs: 3000
+  batch_size: 64
+  lr: 1.0e-4
+  lr_scheduler: cosine
+  warmup_steps: 500
+  weight_decay: 1.0e-6
+  grad_clip_norm: 10.0
+  eval_freq: 5000
+  save_freq: 10000
+  log_freq: 100
+  num_workers: 4
+  ema_power: 0.75

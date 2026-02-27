@@ -1,0 +1,50 @@
+# ACT (Action Chunking with Transformers) policy hyperparameters
+# Reference: https://github.com/tonyzhaozh/act
+
+policy:
+  name: act
+
+  # Model architecture
+  n_obs_steps: 1
+  chunk_size: 100               # action chunk length (T_a)
+  n_action_steps: 100           # steps to execute per inference call
+  input_shapes:
+    observation.state: [7]
+    observation.images.wrist: [3, 480, 640]
+  output_shapes:
+    action: [7]
+
+  # Transformer
+  hidden_dim: 512
+  dim_feedforward: 3200
+  n_heads: 8
+  n_encoder_layers: 4
+  n_decoder_layers: 7
+  dropout: 0.1
+
+  # VAE
+  use_vae: true
+  latent_dim: 32
+  kl_weight: 10.0
+
+  # Normalization
+  normalize_inputs: true
+  normalize_targets: true
+
+training:
+  seed: 42
+  num_epochs: 100
+  batch_size: 8
+  lr: 1.0e-5
+  lr_backbone: 1.0e-5
+  weight_decay: 1.0e-4
+  grad_clip_norm: 10.0
+  eval_freq: 5000               # steps between evaluations
+  save_freq: 10000
+  log_freq: 100
+  num_workers: 4
+
+  # Augmentation
+  image_transforms:
+    brightness: [0.8, 1.2]
+    random_crop: false

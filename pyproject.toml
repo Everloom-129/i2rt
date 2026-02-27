@@ -30,6 +30,21 @@ dependencies = [
 dev = [
     "pytest==8.4.0",
 ]
+grasp_lab = [
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "opencv-python>=4.8",
+    "wandb>=0.17",
+    "matplotlib>=3.8",
+    "Pillow>=10.0",
+    "lerobot @ git+https://github.com/huggingface/lerobot.git",
+]
+grasp_lab_hw = [
+    "pyrealsense2>=2.55",
+    "open3d>=0.18",
+]
 
 [tool.flit.module]
 name = "i2rt"

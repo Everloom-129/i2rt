@@ -1,0 +1,25 @@
+# i2rt YAM arm + RealSense configuration for LeRobot
+# Used by lerobot_training/train.py and eval.py
+
+robot_type: "i2rt_yam"
+
+# Follower (controlled) arm
+follower_can: "can0"
+gripper: "crank_4310"           # crank_4310 | linear_3507 | linear_4310 | no_gripper
+
+# Cameras
+wrist_camera_serial: null       # null = first available RealSense
+top_camera_serial: null         # null = disabled
+image_width: 640
+image_height: 480
+
+# Control
+fps: 30
+state_dim: 7                    # 6 arm joints + 1 gripper
+action_dim: 7
+
+# Feature names (must match dataset)
+state_key: "observation.state"
+action_key: "action"
+camera_keys:
+  - "observation.images.wrist"

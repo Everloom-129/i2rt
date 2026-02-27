@@ -1,0 +1,13 @@
+lerobot @ git+https://github.com/huggingface/lerobot.git
+pyrealsense2
+open3d
+numpy
+torch
+wandb
+tyro
+pandas
+pyarrow
+opencv-python
+matplotlib
+Pillow
+tensorflow  # for openpi RLDS conversion (optional)
